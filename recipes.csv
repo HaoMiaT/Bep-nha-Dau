@@ -1,88 +1,88 @@
 Recipe_ID,Name,Category,Ingredient,Step number,Instruction,Link áº£nh
-1,Bánh gạo tôm áp chảo,Tôm,Tôm,1,Cà rốt hâp sơ
-1,,,Cơm,2,Tôm + cơm + cà rốt -> xay nhuyễn
-1,,,Cà rốt,3,nặn thành thanh/ miếng vừa ăn
-1,,,,4,áp chảo
-2,Bánh cá hồi rong biển,Cá,yến mạch,1,Yến mạch ngâm 30p
-2,,,cá hồi,2,Ngâm cá hồi với chút sữa tươi vài phút cho hết tanh
-2,,,sữa tươi,3,"Hấp chín cá hồi rồi xay cùng yến mạch, rong biển"
-2,,,rong biển,4,Trộn thêm ít bột mì nếu cần
-2,,,bột mì,5,Nặn hình rồi mang đi chiên. Chiên vàng đều 2 mặt
-3,canh khoai mỡ tôm,Tôm,Tôm,1,Sơ chế tôm -> cho thêm ít hành lá -> băm/ xay nhuyễn
-3,,,Khoai mỡ,2,"Khoai mỡ gọt sạch vỏ rồi rửa sạch, bào sợi mỏng hoặc cạo"
-3,,,Hành lá,3,Phi thơm hành tím -> cho tôm vào xào chín
-3,,,hành tím,4,"vớt hết tôm ra, cho khoai mỡ vào xào sơ -> thêm chút nước nấu thành canh sệt"
-3,,,,5,cho tôm vào canh
-3,,,,6,ăn với cơm vo viên/ bánh mì
-4,Bánh thịt bò khoai tây,Thịt bò,thịt bò,1,it tỏi phi thơm
-4,,,rau ngót/ cải bỏ xôi,2,trộn với khoai tây + thịt bò + rau -> xay nhuyễn
-4,,,khoai tây,3,nặn thành thanh/ miếng vừa ăn
-4,,,tỏi,4,áp chảo
-5,Pudding yến mạch mè đen,Pudding,yến mạch,1,mè đen rang chín
-5,,,mè đen,2,yến mạch ngâm 30p
-5,,,sữa tươi,3,yến mạch + mè đen xay nhuyễn với nước lọc hoặc sữa tươi không đường
-5,,,,4,ray lấy nước
-5,,,,5,"đun nhỏ lửa, khuấy đều tay"
-5,,,,6,khi đặc lại thì tắt bếp
-5,,,,7,bôi ít dầu lên khuôn
-5,,,,8,cho yến mạch đã đun vào
-5,,,,9,để tủ lạnh ngăn mát 3 tiếng
-6,Bánh gà khoai lang,Thịt gà,khoai lang,1,gà + khoai lang + cải bó xôi xay nhuyễn
-6,,,thịt gà,2,phi thơm hành tỏi -> trộn vào hỗn hợp
-6,,,bột mì,3,trộn thêm ít bột mì nếu hỗn hợp quá lỏng
-6,,,cải bó xôi,4,nặn thanh/ miếng vừa ăn
-6,,,hành tỏi,5,hấp chín/ áp chảo
-7,Bánh gạo gà áp chảo,Thịt gà,thịt gà,1,it tỏi phi thơm
-7,,,cơm,2,trộn với thịt gà + cơm + rau ngót -> xay nhuyễn
-7,,,rau ngót,3,nặn thành thanh/ miếng vừa ăn
-7,,,tỏi,4,áp chảo
-8,canh khoai mỡ thịt heo,Thịt heo,Khoai mỡ,1,thịt heo + ít hành lá -> băm/ xay nhuyễn
-8,,,Hành lá,2,"Khoai mỡ gọt sạch vỏ rồi rửa sạch, bào sợi mỏng hoặc cạo"
-8,,,thịt heo,3,Phi thơm hành tím -> cho thịt vào xào chín
-8,,,hành tím,4,"vớt hết thịt ra, cho khoai mỡ vào xào sơ -> thêm chút nước nấu thành canh sệt"
-8,,,,5,cho thịt vào canh
-8,,,,6,ăn với cơm vo viên/ bánh mì
-9,Pudding yến mạch trái cây,Pudding,yến mạch,1,yến mạch ngâm 30p
-9,,,trái cây (chuối/ táo/ lê),2,xay nhuyễn với sữa tươi và trái cây
-9,,,sữa tươi,3,ray mịn hỗn hợp
-9,,,,4,"đun nhỏ lửa, khuấy đều tay, khi đặc lại thì tắt bếp"
-9,,,,5,bôi ít dầu lên khuôn
-9,,,,6,cho yến mạch đã đun vào -> để tủ lạnh ngăn mát 3 tiếng
-10,Súp cá hồi bí đỏ,Cá,cá hồi,1,Cá hồi ngâm sữa rồi áp chảo với bơ/ dầu ăn
-10,,,bí đỏ,2,dặm hơi nát cá hồi
-10,,,hành tây,3,"Xào bí đỏ + hành tây cho mềm, thêm nước rồi đem xay"
-10,,,phô mai,4,"Bắc lên bếp khuấy lại, tắt bếp cho 1 cục phô mai vuông vào khuấy tan"
-10,,,bơ,5,thêm cá hồi dằm
-10,,,sữa tươi,6,ăn với cơm vo viên/ bánh mì
-11,Súp cá lóc bí đỏ,Cá,cá lóc,1,"cá lóc hấp với gừng, sau đó dằm hơi nhuyễn"
-11,,,bí đỏ,2,"phi thơm ít hành tỏi, xào với cá"
-11,,,ngò gai,3,"hành tây, bí đỏ luộc chín -> xay nhuyễn -> trộn chút nước bột năng, nấu sôi xăm xắp"
-11,,,"trộn cá vào súp bí đỏ",4,trộn cá vào súp bí đỏ
-11,,,hành tây,5,ăn với cơm vo viên/ bánh mì
-11,,,bột năng,,
-12,Súp thịt bò đậu hà lan,Thịt bò,thịt bò,1,xay nhuyễn thịt bò
-12,,,hành tây,2,phi thơm tỏi -> cho thịt bò vào xào chín
-12,,,đậu hà lan,3,luộc chín hành tây + đậu hà lan -> xay nhuyễn
-12,,,bột năng,4,"trộn thêm ít bột năng pha nước, nấu sôi xăm xắp súp"
-12,,,nước hầm rau củ,5,"tắt bếp, cho thịt bò vào súp"
-12,,,,6,ăn với cơm vo viên/ bánh mì/ nui luộc mềm
-13,Súp đậu hũ non,Đậu hũ,khoai tây,1,"luộc khoai tây, bông cải xanh -> nghiền nhuyễn"
-13,,,bông cải xanh,2,"phi thơm hành tỏi -> trộn khoai tây, bông cải vào"
-13,,,bột năng,3,Thêm nước đun sôi
-13,,,trứng,4,"cho đậu hũ non cắt cục + trứng, khuấy đến khi sánh"
-13,,,hành lá,5,thêm ít bột năng pha nước nếu lỏng quá
-13,,,đậu hũ non,6,thêm ít hành lá cắt nhỏ
-13,,,,7,ăn với cơm vo viên/ bánh mì
-14,Thịt heo xào cà chua,Thịt heo,Thịt heo,1,phi thơm ít hành tím băm nhuyễn
-14,,,cà chua,2,cho thịt heo xay + cà chua xay vào xào chín
-14,,,hành tím,3,cho 1 ít bột năng pha nước vào
-14,,,,4,nấu sôi xăm xắp cho sệt
-14,,,,5,ăn với cơm vo viên/ bánh mì/ nui luộc mềm
-15,Trứng hấp bắp,Trừng,Trứng,1,Hạt bắp + nước ấm -> xay nhuyễn -> Lọc lấy nước
-15,,,bắp,2,"đánh nhẹ trứng, trộn với nước bắp"
-15,,,,3,lọc qua rây
-15,,,,4,hấp khoảng 10 phút
-16,Đậu hũ sốt cà chua,Đậu hũ,Đậu hũ,1,phi thơm hành tỏi
-16,,,Cà chua,2,cho cà chua xay + đậu hũ cắt cục vào nấu chín
-16,,,"thêm ít bột năng pha nước nếu lỏng quá",3,thêm ít bột năng pha nước nếu lỏng quá
-16,,,bột năng,4,ăn với cơm vo viên/ bánh mì/ nui luộc mềm
+1,Bánh gạo tôm áp chảo,Tôm,Tôm,1,Cà rốt hâp sơ,
+1,,,Cơm,2,Tôm + cơm + cà rốt -> xay nhuyễn,
+1,,,Cà rốt,3,nặn thành thanh/ miếng vừa ăn,
+1,,,,4,áp chảo,
+2,Bánh cá hồi rong biển,Cá,yến mạch,1,Yến mạch ngâm 30p,
+2,,,cá hồi,2,Ngâm cá hồi với chút sữa tươi vài phút cho hết tanh,
+2,,,sữa tươi,3,"Hấp chín cá hồi rồi xay cùng yến mạch, rong biển",
+2,,,rong biển,4,Trộn thêm ít bột mì nếu cần,
+2,,,bột mì,5,Nặn hình rồi mang đi chiên. Chiên vàng đều 2 mặt,
+3,canh khoai mỡ tôm,Tôm,Tôm,1,Sơ chế tôm -> cho thêm ít hành lá -> băm/ xay nhuyễn,
+3,,,Khoai mỡ,2,"Khoai mỡ gọt sạch vỏ rồi rửa sạch, bào sợi mỏng hoặc cạo",
+3,,,Hành lá,3,Phi thơm hành tím -> cho tôm vào xào chín,
+3,,,hành tím,4,"vớt hết tôm ra, cho khoai mỡ vào xào sơ -> thêm chút nước nấu thành canh sệt",
+3,,,,5,cho tôm vào canh,
+3,,,,6,ăn với cơm vo viên/ bánh mì,
+4,Bánh thịt bò khoai tây,Thịt bò,thịt bò,1,it tỏi phi thơm,
+4,,,rau ngót/ cải bỏ xôi,2,trộn với khoai tây + thịt bò + rau -> xay nhuyễn,
+4,,,khoai tây,3,nặn thành thanh/ miếng vừa ăn,
+4,,,tỏi,4,áp chảo,
+5,Pudding yến mạch mè đen,Pudding,yến mạch,1,mè đen rang chín,
+5,,,mè đen,2,yến mạch ngâm 30p,
+5,,,sữa tươi,3,yến mạch + mè đen xay nhuyễn với nước lọc hoặc sữa tươi không đường,
+5,,,,4,ray lấy nước,
+5,,,,5,"đun nhỏ lửa, khuấy đều tay",
+5,,,,6,khi đặc lại thì tắt bếp,
+5,,,,7,bôi ít dầu lên khuôn,
+5,,,,8,cho yến mạch đã đun vào,
+5,,,,9,để tủ lạnh ngăn mát 3 tiếng,
+6,Bánh gà khoai lang,Thịt gà,khoai lang,1,gà + khoai lang + cải bó xôi xay nhuyễn,
+6,,,thịt gà,2,phi thơm hành tỏi -> trộn vào hỗn hợp,
+6,,,bột mì,3,trộn thêm ít bột mì nếu hỗn hợp quá lỏng,
+6,,,cải bó xôi,4,nặn thanh/ miếng vừa ăn,
+6,,,hành tỏi,5,hấp chín/ áp chảo,
+7,Bánh gạo gà áp chảo,Thịt gà,thịt gà,1,it tỏi phi thơm,
+7,,,cơm,2,trộn với thịt gà + cơm + rau ngót -> xay nhuyễn,
+7,,,rau ngót,3,nặn thành thanh/ miếng vừa ăn,
+7,,,tỏi,4,áp chảo,
+8,canh khoai mỡ thịt heo,Thịt heo,Khoai mỡ,1,thịt heo + ít hành lá -> băm/ xay nhuyễn,
+8,,,Hành lá,2,"Khoai mỡ gọt sạch vỏ rồi rửa sạch, bào sợi mỏng hoặc cạo",
+8,,,thịt heo,3,Phi thơm hành tím -> cho thịt vào xào chín,
+8,,,hành tím,4,"vớt hết thịt ra, cho khoai mỡ vào xào sơ -> thêm chút nước nấu thành canh sệt",
+8,,,,5,cho thịt vào canh,
+8,,,,6,ăn với cơm vo viên/ bánh mì,
+9,Pudding yến mạch trái cây,Pudding,yến mạch,1,yến mạch ngâm 30p,
+9,,,trái cây (chuối/ táo/ lê),2,xay nhuyễn với sữa tươi và trái cây,
+9,,,sữa tươi,3,ray mịn hỗn hợp,
+9,,,,4,"đun nhỏ lửa, khuấy đều tay, khi đặc lại thì tắt bếp",
+9,,,,5,bôi ít dầu lên khuôn,
+9,,,,6,cho yến mạch đã đun vào -> để tủ lạnh ngăn mát 3 tiếng,
+10,Súp cá hồi bí đỏ,Cá,cá hồi,1,Cá hồi ngâm sữa rồi áp chảo với bơ/ dầu ăn,
+10,,,bí đỏ,2,dặm hơi nát cá hồi,
+10,,,hành tây,3,"Xào bí đỏ + hành tây cho mềm, thêm nước rồi đem xay",
+10,,,phô mai,4,"Bắc lên bếp khuấy lại, tắt bếp cho 1 cục phô mai vuông vào khuấy tan",
+10,,,bơ,5,thêm cá hồi dằm,
+10,,,sữa tươi,6,ăn với cơm vo viên/ bánh mì,
+11,Súp cá lóc bí đỏ,Cá,cá lóc,1,"cá lóc hấp với gừng, sau đó dằm hơi nhuyễn",
+11,,,bí đỏ,2,"phi thơm ít hành tỏi, xào với cá",
+11,,,ngò gai,3,"hành tây, bí đỏ luộc chín -> xay nhuyễn -> trộn chút nước bột năng, nấu sôi xăm xắp",
+11,,,"trộn cá vào súp bí đỏ",4,trộn cá vào súp bí đỏ,
+11,,,hành tây,5,ăn với cơm vo viên/ bánh mì,
+11,,,bột năng,,,
+12,Súp thịt bò đậu hà lan,Thịt bò,thịt bò,1,xay nhuyễn thịt bò,
+12,,,hành tây,2,phi thơm tỏi -> cho thịt bò vào xào chín,
+12,,,đậu hà lan,3,luộc chín hành tây + đậu hà lan -> xay nhuyễn,
+12,,,bột năng,4,"trộn thêm ít bột năng pha nước, nấu sôi xăm xắp súp",
+12,,,nước hầm rau củ,5,"tắt bếp, cho thịt bò vào súp",
+12,,,,6,ăn với cơm vo viên/ bánh mì/ nui luộc mềm,
+13,Súp đậu hũ non,Đậu hũ,khoai tây,1,"luộc khoai tây, bông cải xanh -> nghiền nhuyễn",
+13,,,bông cải xanh,2,"phi thơm hành tỏi -> trộn khoai tây, bông cải vào",
+13,,,bột năng,3,Thêm nước đun sôi,
+13,,,trứng,4,"cho đậu hũ non cắt cục + trứng, khuấy đến khi sánh",
+13,,,hành lá,5,thêm ít bột năng pha nước nếu lỏng quá,
+13,,,đậu hũ non,6,thêm ít hành lá cắt nhỏ,
+13,,,,7,ăn với cơm vo viên/ bánh mì,
+14,Thịt heo xào cà chua,Thịt heo,Thịt heo,1,phi thơm ít hành tím băm nhuyễn,
+14,,,cà chua,2,cho thịt heo xay + cà chua xay vào xào chín,
+14,,,hành tím,3,cho 1 ít bột năng pha nước vào,
+14,,,,4,nấu sôi xăm xắp cho sệt,
+14,,,,5,ăn với cơm vo viên/ bánh mì/ nui luộc mềm,
+15,Trứng hấp bắp,Trừng,Trứng,1,Hạt bắp + nước ấm -> xay nhuyễn -> Lọc lấy nước,
+15,,,bắp,2,"đánh nhẹ trứng, trộn với nước bắp",
+15,,,,3,lọc qua rây,
+15,,,,4,hấp khoảng 10 phút,
+16,Đậu hũ sốt cà chua,Đậu hũ,Đậu hũ,1,phi thơm hành tỏi,
+16,,,Cà chua,2,cho cà chua xay + đậu hũ cắt cục vào nấu chín,
+16,,,"thêm ít bột năng pha nước nếu lỏng quá",3,thêm ít bột năng pha nước nếu lỏng quá,
+16,,,bột năng,4,ăn với cơm vo viên/ bánh mì/ nui luộc mềm,
