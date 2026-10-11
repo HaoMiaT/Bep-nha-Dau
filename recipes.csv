@@ -1,5 +1,5 @@
 Recipe_ID,Name,Category,Ingredient,Step number,Instruction,Link áº£nh
-1,Bánh gạo tôm áp chảo,Tôm,Tôm,1,Cà rốt hấp sơ,
+1,Bánh gạo tôm áp chảo,Tôm,Tôm,1,Cà rốt hâp sơ,
 1,,,Cơm,2,Tôm + cơm + cà rốt -> xay nhuyễn,
 1,,,Cà rốt,3,nặn thành thanh/ miếng vừa ăn,
 1,,,,4,áp chảo,
@@ -8,3 +8,8 @@ Recipe_ID,Name,Category,Ingredient,Step number,Instruction,Link áº£nh
 2,,,sữa tươi,3,"Hấp chín cá hồi rồi xay cùng yến mạch, rong biển",
 2,,,rong biển,4,Trộn thêm ít bột mì nếu cần,
 2,,,bột mì,5,Nặn hình rồi mang đi chiên. Chiên vàng đều 2 mặt,
+3,canh khoai mỡ tôm,Tôm,Tôm,1,Sơ chế tôm -> cho thêm ít hành lá -> băm/ xay nhuyễn,
+3,,,Khoai mỡ,2,"Khoai mỡ gọt sạch vỏ rồi rửa sạch, bào sợi mỏng hoặc cạo",
+3,,,Hành lá,3,Phi thơm hành tím -> cho tôm vào xào chín,
+3,,,hành tím,4,"vớt hết tôm ra, cho khoai mỡ vào xào sơ -> thêm chút nước nấu thành canh sệt",
+3,,,,5,cho tôm vào canh,
