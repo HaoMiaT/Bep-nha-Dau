@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f7f2e8">
+  <title>Bếp nhà Đậu</title>
+  <meta name="description" content="Sổ tay công thức nấu ăn của Bếp nhà Đậu.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="#" aria-label="Bếp nhà Đậu - Trang chủ">
+      <span class="brand-mark">đ</span>
+      <span><strong>Bếp nhà Đậu</strong><small>Món ngon, thương yêu mỗi ngày</small></span>
+    </a>
+    <span class="read-only"><span class="dot"></span> Sổ tay công thức</span>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="hero-copy">
+        <p class="eyebrow">TỪ CĂN BẾP NHỎ</p>
+        <h1>Nấu một chút,<br><em>thương thật nhiều.</em></h1>
+        <p class="hero-text">Những công thức nhà mình đã lưu lại, để mỗi bữa ăn đều dễ dàng hơn một chút.</p>
+        <div class="hero-note"><span>♡</span> Lưu giữ những món ngon dành cho Đậu</div>
+      </div>
+      <div class="hero-art" aria-hidden="true">
+        <div class="sun"></div><div class="plate"><div class="plate-inner"><span>🥕</span><span>🍤</span><span>🍚</span></div></div>
+        <span class="spark spark-one">✳</span><span class="spark spark-two">✦</span>
+        <span class="art-caption">made with love</span>
+      </div>
+    </section>
+
+    <section class="recipe-section">
+      <div class="section-heading">
+        <div><p class="eyebrow">SỔ TAY NHÀ MÌNH</p><h2>Công thức <span id="recipe-count">đang tải…</span></h2></div>
+      </div>
+      <div class="toolbar">
+        <label class="searchbox"><span>⌕</span><input id="search" type="search" placeholder="Tìm món ăn, nguyên liệu…" aria-label="Tìm công thức"></label>
+        <div id="categories" class="category-list" aria-label="Lọc theo danh mục"></div>
+      </div>
+      <div id="status" class="status">Đang đọc sổ tay công thức…</div>
+      <div id="recipe-grid" class="recipe-grid"></div>
+      <p id="empty-state" class="empty-state" hidden>Chưa tìm thấy món này. Thử từ khóa khác nhé.</p>
+    </section>
+  </main>
+
+  <footer><span class="footer-heart">♡</span> Bếp nhà Đậu <span class="footer-sep">·</span> Một cuốn sổ nhỏ, thật nhiều yêu thương.</footer>
+
+  <dialog id="recipe-dialog" class="recipe-dialog">
+    <button id="close-dialog" class="close-dialog" aria-label="Đóng">×</button>
+    <div id="dialog-content"></div>
+  </dialog>
+  <script src="app.js"></script>
+</body>
+</html>
