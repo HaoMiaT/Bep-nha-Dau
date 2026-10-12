@@ -1,445 +1,241 @@
-
+// Bếp nhà Đậu — bản sửa hiển thị Category / Category1 / Category2
 const CSV_URL = "./recipes.csv";
-
 const PALETTES = ["peach", "green", "blue", "yellow", "pink", "purple"];
-
 const EMOJI_BY_CATEGORY = {
-  "tôm": "🍤",
-  "cá": "🐟",
-  "gà": "🍗",
-  "bò": "🥩",
-  "heo": "🥩",
-  "thịt": "🍖",
-  "rau": "🥦",
-  "trứng": "🥚",
-  "bánh": "🥞",
-  "cháo": "🥣",
-  "mì": "🍜",
-  "cơm": "🍚",
-  "trái cây": "🍓",
-  "canh": "🥣"
+  "tôm":"🍤","cá":"🐟","gà":"🍗","bò":"🥩","heo":"🥩","thịt":"🍖",
+  "rau":"🥦","trứng":"🥚","bánh":"🥞","cháo":"🥣","mì":"🍜","cơm":"🍚","canh":"🥣"
 };
 
 let recipes = [];
 let activeCategory = "Tất cả";
+let activeSubcategory = "Tất cả";
 
-function clean(value) {
-  return (value ?? "").toString().trim();
+function norm(s) {
+  return String(s ?? "").replace(/^\uFEFF/, "").trim().toLocaleLowerCase("vi");
 }
+function clean(s) { return String(s ?? "").replace(/^\uFEFF/, "").trim(); }
 
-function getField(row, names) {
-  const key = Object.keys(row).find(k =>
-    names.includes(k.trim().toLowerCase())
-  );
-  return key ? clean(row[key]) : "";
+function getField(row, aliases) {
+  const keys = Object.keys(row);
+  const aliasSet = new Set(aliases.map(norm));
+  const key = keys.find(k => aliasSet.has(norm(k)));
+  return key === undefined ? "" : clean(row[key]);
 }
 
 function parseRecipes(rows) {
   const grouped = new Map();
 
-  rows.forEach(row => {
-    const id = getField(row, [
-      "recipe_id", "recipe id", "id"
-    ]);
-
-    if (!id) return;
+  for (const row of rows) {
+    const id = getField(row, ["Recipe_ID", "Recipe ID", "id"]);
+    if (!id) continue;
 
     if (!grouped.has(id)) {
       grouped.set(id, {
-        id,
-        name: "",
-        category1: "",
-        category2: "",
-        oldCategory: "",
-        ingredients: [],
-        steps: [],
-        image: ""
+        id, name: "", category1: "", category2: "", oldCategory: "",
+        ingredients: [], steps: [], image: ""
       });
     }
 
-    const recipe = grouped.get(id);
+    const r = grouped.get(id);
+    r.name ||= getField(row, ["Name", "Tên", "Tên món"]);
+    r.category1 ||= getField(row, ["Category1", "Category 1", "Danh mục 1"]);
+    r.category2 ||= getField(row, ["Category2", "Category 2", "Danh mục 2"]);
+    r.oldCategory ||= getField(row, ["Category", "Danh mục", "Loại"]);
+    r.image ||= getField(row, ["Link ảnh", "Image", "Image_URL", "Ảnh"]);
 
-    recipe.name ||= getField(row, ["name", "tên", "tên món"]);
+    const ingredient = getField(row, ["Ingredient", "Ingredients", "Nguyên liệu"]);
+    if (ingredient && !r.ingredients.includes(ingredient)) r.ingredients.push(ingredient);
 
-    recipe.category1 ||= getField(row, [
-      "category1", "category 1", "danh mục 1"
-    ]);
+    const number = getField(row, ["Step number", "Step_Number", "Bước", "Số bước"]);
+    const instruction = getField(row, ["Instruction", "Hướng dẫn", "Cách làm"]);
+    if (instruction) r.steps.push({ number: number || String(r.steps.length + 1), instruction });
+  }
 
-    recipe.category2 ||= getField(row, [
-      "category2", "category 2", "danh mục 2"
-    ]);
-
-    recipe.oldCategory ||= getField(row, [
-      "category", "danh mục", "loại"
-    ]);
-
-    recipe.image ||= getField(row, [
-      "link ảnh", "image", "image_url", "ảnh"
-    ]);
-
-    const ingredient = getField(row, [
-      "ingredient", "ingredients", "nguyên liệu"
-    ]);
-
-    if (
-      ingredient &&
-      !recipe.ingredients.includes(ingredient)
-    ) {
-      recipe.ingredients.push(ingredient);
-    }
-
-    const stepNumber = getField(row, [
-      "step number", "step_number", "bước", "số bước"
-    ]);
-
-    const instruction = getField(row, [
-      "instruction", "hướng dẫn", "cách làm"
-    ]);
-
-    if (instruction) {
-      recipe.steps.push({
-        number: stepNumber || String(recipe.steps.length + 1),
-        instruction
-      });
-    }
+  return [...grouped.values()].filter(r => r.name).map(r => {
+    // Hỗ trợ file cũ chỉ có Category và file mới có Category1/Category2.
+    const category1 = r.category1 || r.oldCategory || "Khác";
+    return {
+      ...r,
+      category1,
+      category2: r.category2 || "",
+      steps: r.steps.sort((a,b) => (Number(a.number) || 0) - (Number(b.number) || 0))
+    };
   });
-
-  return [...grouped.values()]
-    .filter(recipe => recipe.name)
-    .map(recipe => {
-      const category1 =
-        recipe.category1 || recipe.oldCategory || "Khác";
-
-      const category2 =
-        recipe.category2 ||
-        (recipe.category1 ? "" : "");
-
-      return {
-        ...recipe,
-        category1,
-        category2,
-        steps: recipe.steps.sort(
-          (a, b) =>
-            (Number(a.number) || 0) -
-            (Number(b.number) || 0)
-        )
-      };
-    });
 }
 
 function escapeHTML(value) {
-  return String(value).replace(/[&<>"']/g, char => ({
-    "&": "&amp;",
-    "<": "&lt;",
-    ">": "&gt;",
-    '"': "&quot;",
-    "'": "&#39;"
-  })[char]);
+  return String(value).replace(/[&<>"']/g, c => ({
+    "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"
+  })[c]);
 }
-
-function emojiFor(recipe) {
-  const text = [
-    recipe.name,
-    recipe.category1,
-    recipe.category2
-  ].join(" ").toLowerCase();
-
+function categoryLabel(r) {
+  return [r.category1, r.category2].filter(Boolean).join(" · ") || "Món nhà làm";
+}
+function emojiFor(r) {
+  const text = `${r.name} ${r.category1} ${r.category2}`.toLocaleLowerCase("vi");
   for (const [key, emoji] of Object.entries(EMOJI_BY_CATEGORY)) {
     if (text.includes(key)) return emoji;
   }
-
   return "🍲";
 }
 
 function renderCategories() {
-  const container = document.querySelector("#categories");
+  const el = document.querySelector("#categories");
+  if (!el) return;
+  const categories = ["Tất cả", ...new Set(recipes.map(r => r.category1).filter(Boolean))];
+  if (!categories.includes(activeCategory)) activeCategory = "Tất cả";
 
-  const categories = [
-    "Tất cả",
-    ...new Set(
-      recipes.map(r => r.category1).filter(Boolean)
-    )
-  ];
+  el.innerHTML = categories.map(c => `
+    <button class="category-button ${c === activeCategory ? "active" : ""}"
+      data-category="${escapeHTML(c)}">${escapeHTML(c)}</button>`).join("");
 
-  container.innerHTML = categories.map(category => `
-    <button
-      class="category-button ${
-        category === activeCategory ? "active" : ""
-      }"
-      data-category="${escapeHTML(category)}"
-    >${escapeHTML(category)}</button>
-  `).join("");
-
-  container.querySelectorAll("button").forEach(button => {
-    button.addEventListener("click", () => {
-      activeCategory = button.dataset.category;
-
-      // Khi đổi danh mục lớn, trở về tất cả danh mục nhỏ.
-      document.querySelector("#subcategories").dataset.active =
-        "Tất cả";
-
-      renderCategories();
-      renderCards();
-    });
-  });
-
+  el.querySelectorAll("button").forEach(btn => btn.addEventListener("click", () => {
+    activeCategory = btn.dataset.category;
+    activeSubcategory = "Tất cả";
+    renderCategories();
+    renderCards();
+  }));
   renderSubcategories();
 }
 
 function renderSubcategories() {
-  const container = document.querySelector("#subcategories");
+  const el = document.querySelector("#subcategories");
+  if (!el) return;
+  const scope = activeCategory === "Tất cả" ? recipes : recipes.filter(r => r.category1 === activeCategory);
+  const children = [...new Set(scope.map(r => r.category2).filter(Boolean))];
 
-  const scopedRecipes =
-    activeCategory === "Tất cả"
-      ? recipes
-      : recipes.filter(r => r.category1 === activeCategory);
-
-  const categories = [
-    "Tất cả",
-    ...new Set(
-      scopedRecipes.map(r => r.category2).filter(Boolean)
-    )
-  ];
-
-  if (categories.length === 1) {
-    container.hidden = true;
-    container.innerHTML = "";
-    container.dataset.active = "Tất cả";
+  if (!children.length) {
+    el.hidden = true;
+    el.innerHTML = "";
+    activeSubcategory = "Tất cả";
     return;
   }
 
-  container.hidden = false;
+  el.hidden = false;
+  const options = ["Tất cả", ...children];
+  if (!options.includes(activeSubcategory)) activeSubcategory = "Tất cả";
+  el.innerHTML = options.map(c => `
+    <button class="subcategory-button ${c === activeSubcategory ? "active" : ""}"
+      data-subcategory="${escapeHTML(c)}">${escapeHTML(c)}</button>`).join("");
 
-  let selected = container.dataset.active || "Tất cả";
-
-  if (!categories.includes(selected)) {
-    selected = "Tất cả";
-  }
-
-  container.dataset.active = selected;
-
-  container.innerHTML = categories.map(category => `
-    <button
-      class="subcategory-button ${
-        category === selected ? "active" : ""
-      }"
-      data-subcategory="${escapeHTML(category)}"
-    >${escapeHTML(category)}</button>
-  `).join("");
-
-  container.querySelectorAll("button").forEach(button => {
-    button.addEventListener("click", () => {
-      container.dataset.active = button.dataset.subcategory;
-      renderSubcategories();
-      renderCards();
-    });
-  });
+  el.querySelectorAll("button").forEach(btn => btn.addEventListener("click", () => {
+    activeSubcategory = btn.dataset.subcategory;
+    renderSubcategories();
+    renderCards();
+  }));
 }
 
 function visibleRecipes() {
-  const query = document.querySelector("#search")
-    .value.trim().toLocaleLowerCase("vi");
-
-  const subcategory =
-    document.querySelector("#subcategories").dataset.active ||
-    "Tất cả";
-
-  return recipes.filter(recipe => {
-    const matchesCategory =
-      activeCategory === "Tất cả" ||
-      recipe.category1 === activeCategory;
-
-    const matchesSubcategory =
-      subcategory === "Tất cả" ||
-      recipe.category2 === subcategory;
-
-    const searchableText = [
-      recipe.name,
-      recipe.category1,
-      recipe.category2,
-      ...recipe.ingredients
-    ].join(" ").toLocaleLowerCase("vi");
-
-    return (
-      matchesCategory &&
-      matchesSubcategory &&
-      searchableText.includes(query)
-    );
+  const search = (document.querySelector("#search")?.value || "").trim().toLocaleLowerCase("vi");
+  return recipes.filter(r => {
+    const ok1 = activeCategory === "Tất cả" || r.category1 === activeCategory;
+    const ok2 = activeSubcategory === "Tất cả" || r.category2 === activeSubcategory;
+    const text = [r.name, r.category1, r.category2, r.oldCategory, ...r.ingredients]
+      .join(" ").toLocaleLowerCase("vi");
+    return ok1 && ok2 && text.includes(search);
   });
 }
 
 function renderCards() {
+  const grid = document.querySelector("#recipe-grid");
+  if (!grid) return;
   const shown = visibleRecipes();
+  const count = document.querySelector("#recipe-count");
+  if (count) count.textContent = `${recipes.length} món`;
 
-  document.querySelector("#recipe-count").textContent =
-    `${recipes.length} món`;
+  grid.innerHTML = shown.map(r => {
+    const i = recipes.indexOf(r);
+    const art = r.image
+      ? `<img src="${escapeHTML(r.image)}" alt="${escapeHTML(r.name)}" style="width:100%;height:100%;object-fit:cover">`
+      : `<span class="card-emoji">${emojiFor(r)}</span>`;
+    return `<article class="recipe-card" tabindex="0" role="button" data-id="${escapeHTML(r.id)}">
+      <div class="card-art ${PALETTES[i % PALETTES.length]}">
+        ${art}<span class="category-tag">${escapeHTML(categoryLabel(r))}</span>
+      </div>
+      <div class="card-body"><h3>${escapeHTML(r.name)}</h3>
+        <div class="card-meta"><span>${r.ingredients.length} nguyên liệu · ${r.steps.length} bước</span>
+        <span class="view">Xem công thức ↗</span></div>
+      </div></article>`;
+  }).join("");
 
-  document.querySelector("#recipe-grid").innerHTML =
-    shown.map(recipe => {
-      const index = recipes.indexOf(recipe);
-      const palette = PALETTES[index % PALETTES.length];
+  const empty = document.querySelector("#empty-state");
+  if (empty) empty.hidden = shown.length > 0;
 
-      const art = recipe.image
-        ? `<img src="${escapeHTML(recipe.image)}"
-             alt="${escapeHTML(recipe.name)}"
-             style="width:100%;height:100%;object-fit:cover">`
-        : `<span class="card-emoji">${emojiFor(recipe)}</span>`;
-
-      const categoryLabel = [
-        recipe.category1,
-        recipe.category2
-      ].filter(Boolean).join(" · ");
-
-      return `
-        <article
-          class="recipe-card"
-          tabindex="0"
-          role="button"
-          data-id="${escapeHTML(recipe.id)}"
-        >
-          <div class="card-art ${palette}">
-            ${art}
-            <span class="category-tag">
-              ${escapeHTML(categoryLabel || "Món nhà làm")}
-            </span>
-          </div>
-
-          <div class="card-body">
-            <h3>${escapeHTML(recipe.name)}</h3>
-            <div class="card-meta">
-              <span>
-                ${recipe.ingredients.length} nguyên liệu ·
-                ${recipe.steps.length} bước
-              </span>
-              <span class="view">Xem công thức ↗</span>
-            </div>
-          </div>
-        </article>
-      `;
-    }).join("");
-
-  document.querySelector("#empty-state").hidden =
-    shown.length > 0;
-
-  document.querySelectorAll(".recipe-card").forEach(card => {
-    const openRecipe = () => showRecipe(card.dataset.id);
-
-    card.addEventListener("click", openRecipe);
-
-    card.addEventListener("keydown", event => {
-      if (event.key === "Enter" || event.key === " ") {
-        event.preventDefault();
-        openRecipe();
-      }
+  grid.querySelectorAll(".recipe-card").forEach(card => {
+    const open = () => showRecipe(card.dataset.id);
+    card.addEventListener("click", open);
+    card.addEventListener("keydown", e => {
+      if (e.key === "Enter" || e.key === " ") { e.preventDefault(); open(); }
     });
   });
 }
 
 function showRecipe(id) {
-  const recipe = recipes.find(r => r.id === id);
-  if (!recipe) return;
-
+  const r = recipes.find(item => item.id === id);
+  if (!r) return;
   const dialog = document.querySelector("#recipe-dialog");
+  const content = document.querySelector("#dialog-content");
+  if (!dialog || !content) return;
 
-  const hero = recipe.image
-    ? `<img src="${escapeHTML(recipe.image)}"
-         alt="${escapeHTML(recipe.name)}"
-         style="width:100%;height:180px;object-fit:cover">`
-    : `<div class="dialog-hero">${emojiFor(recipe)}</div>`;
-
-  const ingredients = recipe.ingredients.length
-    ? recipe.ingredients.map(item =>
-        `<li>${escapeHTML(item)}</li>`
-      ).join("")
+  const hero = r.image
+    ? `<img src="${escapeHTML(r.image)}" alt="${escapeHTML(r.name)}" style="width:100%;height:180px;object-fit:cover">`
+    : `<div class="dialog-hero">${emojiFor(r)}</div>`;
+  const ingredients = r.ingredients.length
+    ? r.ingredients.map(x => `<li>${escapeHTML(x)}</li>`).join("")
     : "<li>Chưa có dữ liệu nguyên liệu.</li>";
-
-  const steps = recipe.steps.length
-    ? recipe.steps.map(step => `
-        <li>
-          <span class="step-number">
-            ${escapeHTML(step.number)}
-          </span>
-          <div>${escapeHTML(step.instruction)}</div>
-        </li>
-      `).join("")
+  const steps = r.steps.length
+    ? r.steps.map(s => `<li><span class="step-number">${escapeHTML(s.number)}</span><div>${escapeHTML(s.instruction)}</div></li>`).join("")
     : "<li>Chưa có hướng dẫn nấu.</li>";
 
-  const categoryLabel = [
-    recipe.category1,
-    recipe.category2
-  ].filter(Boolean).join(" · ");
-
-  document.querySelector("#dialog-content").innerHTML = `
-    ${hero}
-    <div class="dialog-inner">
-      <div class="dialog-category">
-        ${escapeHTML(categoryLabel || "Bếp nhà Đậu")}
-      </div>
-
-      <h2>${escapeHTML(recipe.name)}</h2>
-
-      <h3>Nguyên liệu</h3>
-      <ul class="ingredient-list">${ingredients}</ul>
-
-      <h3>Cách làm</h3>
-      <ol class="steps">${steps}</ol>
-    </div>
-  `;
-
-  dialog.showModal();
+  content.innerHTML = `${hero}<div class="dialog-inner">
+    <div class="dialog-category">${escapeHTML(categoryLabel(r))}</div>
+    <h2>${escapeHTML(r.name)}</h2>
+    <h3>Nguyên liệu</h3><ul class="ingredient-list">${ingredients}</ul>
+    <h3>Cách làm</h3><ol class="steps">${steps}</ol>
+  </div>`;
+  if (typeof dialog.showModal === "function") dialog.showModal();
+  else dialog.setAttribute("open", "");
 }
 
-document.querySelector("#search").addEventListener(
-  "input",
-  renderCards
-);
-
-document.querySelector("#close-dialog").addEventListener(
-  "click",
-  () => document.querySelector("#recipe-dialog").close()
-);
-
-document.querySelector("#recipe-dialog").addEventListener(
-  "click",
-  event => {
-    if (event.target === event.currentTarget) {
-      event.currentTarget.close();
-    }
+document.querySelector("#search")?.addEventListener("input", renderCards);
+document.querySelector("#close-dialog")?.addEventListener("click", () => {
+  const d = document.querySelector("#recipe-dialog");
+  if (d?.close) d.close(); else d?.removeAttribute("open");
+});
+document.querySelector("#recipe-dialog")?.addEventListener("click", e => {
+  if (e.target === e.currentTarget) {
+    if (e.currentTarget.close) e.currentTarget.close();
+    else e.currentTarget.removeAttribute("open");
   }
-);
+});
 
-fetch(CSV_URL + "?v=" + Date.now(), { cache: "no-store" })
-  .then(response => {
-    if (!response.ok) {
-      throw new Error("Không tìm thấy recipes.csv");
-    }
-    return response.text();
-  })
+fetch(`${CSV_URL}?v=${Date.now()}`, { cache: "no-store" })
+  .then(response => { if (!response.ok) throw new Error("CSV missing"); return response.text(); })
   .then(csv => {
     const parsed = Papa.parse(csv, {
-      header: true,
-      skipEmptyLines: "greedy"
+      header: true, skipEmptyLines: "greedy",
+      transformHeader: h => h.replace(/^\uFEFF/, "").trim()
     });
-
     recipes = parseRecipes(parsed.data);
-
     const status = document.querySelector("#status");
 
     if (!recipes.length) {
-      status.className = "status error";
-      status.textContent =
-        "Chưa đọc được công thức. Hãy kiểm tra file CSV.";
+      if (status) {
+        status.hidden = false;
+        status.className = "status error";
+        status.textContent = "Không đọc được công thức. Kiểm tra tiêu đề CSV và cột Recipe_ID.";
+      }
       return;
     }
-
-    status.hidden = true;
+    if (status) status.hidden = true;
     renderCategories();
     renderCards();
   })
   .catch(() => {
     const status = document.querySelector("#status");
-
-    status.className = "status error";
-    status.textContent =
-      "Chưa tải được dữ liệu. Hãy kiểm tra file recipes.csv.";
+    if (status) {
+      status.hidden = false;
+      status.className = "status error";
+      status.textContent = "Không tải được recipes.csv. Hãy kiểm tra file nằm cùng thư mục với index.html.";
+    }
   });
